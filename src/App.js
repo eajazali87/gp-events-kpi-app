@@ -8,9 +8,9 @@ class App extends Component {
 
   componentDidMount() {
     const options = {
-      headers: new Headers({'content-type': 'application/json','Authorization':'Token token=tTYpWTiYQymaL-Xwzo3H'}),
+      headers: new Headers({'content-type': 'application/json','Authorization':'Token token=xyz'}),
   };
-    fetch('https://api.pagerduty.com/teams/PS42LN4', options)
+    fetch('https://api.pagerduty.com/teams/xyz', options)
     .then(res => res.json())
     .then((data) => {
       this.setState({ alerts: data })
