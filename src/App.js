@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import Alerts from './components/alerts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    alerts: [],
+    pdutys: []
+  }
+
+  componentDidMount() {
+    const options = {
+      headers: new Headers({'content-type': 'application/json','Authorization':'Token token=XXXXXXX'}),
+  };
+    fetch('http://jsonplaceholder.typicode.com/users', options)
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ alerts: data })
+    })
+    .catch(console.log)
+  }
+
+  render () {
+    return (
+      <Alerts alerts={this.state.alerts} />
+    )
+  }
 }
 
 export default App;

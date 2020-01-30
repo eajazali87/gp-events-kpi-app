@@ -1,0 +1,8 @@
+Incident by incident_number:
+https://api.pagerduty.com/incidents/434093
+
+Incident by ID:
+https://api.pagerduty.com/teams/PS42LN4
+
+Segment Team ID: PS42LN4
+https://api.pagerduty.com/incidents?limit=100&since=2020-01-27&until=2020-01-28&team_ids%5B%5D=PW3RCMY
