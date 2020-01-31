@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Alerts from './components/alerts';
+import Alerts from './components/pages/alerts';
 
 const alertsPerWeek = 'https://api.pagerduty.com/incidents?limit=100&since=2020-01-10&until=2020-01-28&team_ids%5B%5D=PS42LN4'
 const token = 'Token token=xyz'
