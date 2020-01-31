@@ -6,7 +6,7 @@ const token = 'Token xyz'
 
 class App extends Component {
   state = {
-    alertsForCurrentWeek: []
+    alerts: []
   }
 
   componentDidMount() {
