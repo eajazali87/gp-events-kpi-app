@@ -1,32 +1,49 @@
+import React from 'react';
+import {Line} from 'react-chartjs-2';
 
-// src/components/pages/contacts.js
-import React, { Component } from 'react';
-import '../../../node_modules/react-vis/dist/style.css';
-import {XYPlot, LineSeries, HorizontalGridLines, VerticalGridLines, XAxis, YAxis} from 'react-vis';
+const state = {
+  labels: ['January', 'February', 'March',
+           'April', 'May'],
+  datasets: [
+    {
+      label: 'Rainfall',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(75,192,192,1)',
+      borderColor: 'rgba(0,0,0,1)',
+      borderWidth: 2,
+      data: [65, 59, 80, 81, 56]
+    },
+    {
+      label: 'Sunshine',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(75,192,192,1)',
+      borderColor: 'rgba(0,0,0,1)',
+      borderWidth: 2,
+      data: [75, 59, 80, 81, 56]
+    }
+  ]
+}
 
-export default class AWSCosts extends Component {
+export default class AWS extends React.Component {
   render() {
-    const data = [
-      {x: 0, y: 8},
-      {x: 1, y: 5},
-      {x: 2, y: 4},
-      {x: 3, y: 9},
-      {x: 4, y: 1},
-      {x: 5, y: 7},
-      {x: 6, y: 6},
-      {x: 7, y: 3},
-      {x: 8, y: 2},
-      {x: 9, y: 0}
-    ];
     return (
-      <div className="App">
-        <XYPlot height={300} width={300}>
-        <VerticalGridLines />
-<HorizontalGridLines />
-<XAxis />
-<YAxis />
-<LineSeries data={data} />
-        </XYPlot>
+      <div>
+        <Line
+          data={state}
+          options={{
+            title:{
+              display:true,
+              text:'Average Rainfall per month',
+              fontSize:20
+            },
+            legend:{
+              display:true,
+              position:'right'
+            }
+          }}
+        />
       </div>
     );
   }
