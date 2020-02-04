@@ -2,6 +2,7 @@
 // src/components/pages/contacts.js
 import React, { Component } from 'react';
 import moment from 'moment';
+import {Line, Doughnut,Bar,HorizontalBar} from 'react-chartjs-2';
 
 const todaysDate = moment().format('YYYY-MM-DD');
 const todaysDateMinusOne = moment().subtract(7,'days').format('YYYY-MM-DD');
@@ -24,12 +25,14 @@ export default class Alerts extends Component {
     alertsThisWeek: [],
     highAlertsThisWeek: '',
     lowAlertsThisWeek: '',
+
     alertsThisWeekMinusOne: [],
     highAlertsThisWeekMinusOne: '',
     lowAlertsThisWeekMinusOne: '',
+
     alertsThisWeekMinusTwo: [],
     highAlertsThisWeekMinusTwo: '',
-    lowAlertsThisWeekMinusTwo: '',
+    lowAlertsThisWeekMinusTwo: ''
   }
 
   componentDidMount() {
@@ -60,12 +63,33 @@ export default class Alerts extends Component {
     })
     .catch(console.log)
   }
-
   render () {
+    const chartData = {
+      labels: [todaysDateMinusTwo, todaysDateMinusOne, moment().format('YYYY-MM-DD')],
+      datasets: [
+        {
+          label: 'Low',
+          fill: false,
+          backgroundColor: 'rgba(75,192,192,1)',
+          borderColor: 'rgba(0,0,0,1)',
+          borderWidth: 3,
+          data: [this.state.lowAlertsThisWeekMinusTwo,this.state.lowAlertsThisWeekMinusOne, this.state.lowAlertsThisWeek]
+        },
+        {
+          label: 'High',
+          fill: false,
+          backgroundColor: 'rgba(75,192,192,1)',
+          borderColor: 'rgba(255, 0, 0, 1)',
+          borderWidth: 3,
+          data: [this.state.highAlertsThisWeekMinusTwo,this.state.highAlertsThisWeekMinusOne, this.state.highAlertsThisWeek]
+        }
+      ]
+    }
+
     return (
       <div>
       <center><h1>Segments Alerts</h1></center>
-      <h3 id='title'>High Priority</h3>
+      <h3 id='title'>Alerts Per Week</h3>
       <table class="table">
       <thead class="thead-dark">
       <tr>
@@ -104,8 +128,23 @@ export default class Alerts extends Component {
       </tr>
       </tbody>
       </table>
-
-
+      <HorizontalBar
+      data={chartData}
+      width={1}
+      height={5}
+      options={{
+        title:{
+          display:true,
+          text:'Alerts trend',
+          fontSize:20
+        },
+        legend:{
+          display:true,
+          position:'right'
+        }
+      },
+      { maintainAspectRatio: false }}
+      />
       </div>
     )
   }
