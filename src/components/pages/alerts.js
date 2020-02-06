@@ -2,19 +2,19 @@
 // src/components/pages/contacts.js
 import React, { Component } from 'react';
 import moment from 'moment';
-import {Line, Doughnut,Bar,HorizontalBar} from 'react-chartjs-2';
+import {Line, Doughnut,Bar,HorizontalBar, Pie} from 'react-chartjs-2';
 
 const todaysDate = moment().format('YYYY-MM-DD');
 const todaysDateMinusOne = moment().subtract(7,'days').format('YYYY-MM-DD');
 const todaysDateMinusTwo = moment().subtract(14,'days').format('YYYY-MM-DD');
 const todaysDateMinusThree = moment().subtract(21,'days').format('YYYY-MM-DD');
-const teamId = 'PDZPWAT'
+const teamId = 'PS42LN4'
 
 const alertsThisWeekEndpoint = 'https://api.pagerduty.com/incidents?limit=100&since='+todaysDateMinusOne+'&until='+todaysDate+'&team_ids%5B%5D='+teamId
 const alertsThisWeekMinusOneEndpoint = 'https://api.pagerduty.com/incidents?limit=100&since='+todaysDateMinusTwo+'&until='+todaysDateMinusOne+'&team_ids%5B%5D='+teamId
 const alertsThisWeekMinusTwoEndpoint = 'https://api.pagerduty.com/incidents?limit=100&since='+todaysDateMinusThree+'&until='+todaysDateMinusTwo+'&team_ids%5B%5D='+teamId
 
-const token = 'Token xyz'
+const token = 'Token token=xyz'
 
 const options = {
   headers: new Headers({'content-type': 'application/json','Authorization':token}),
@@ -98,7 +98,7 @@ export default class Alerts extends Component {
       <th scope="col">Num. Alerts</th>
       <th scope="col">High Alerts</th>
       <th scope="col">Low Alerts</th>
-      <th scope="col">Auto-Resolved</th>
+      <th scope="col">Resolved</th>
       </tr>
       </thead>
       <tbody>
@@ -128,10 +128,11 @@ export default class Alerts extends Component {
       </tr>
       </tbody>
       </table>
-      <HorizontalBar
+      <div>
+      <Line
       data={chartData}
-      width={1}
-      height={5}
+      width={300}
+      height={400}
       options={{
         title:{
           display:true,
@@ -145,6 +146,7 @@ export default class Alerts extends Component {
       },
       { maintainAspectRatio: false }}
       />
+      </div>
       </div>
     )
   }
